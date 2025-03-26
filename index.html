@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="container">
         <!-- Title Section -->
         <div id="title">
@@ -29,18 +28,30 @@
 
         <!-- Control Buttons -->
         <div class="buttons">
-            <button id="start_stop">Start</button>
-            <button id="pause">Pause</button>
+            <button id="start">Start</button>
+            <!-- Pause and Stop buttons will be hidden by default -->
+            <button id="pause" class="hidden">Pause</button>
+            <button id="stop" class="hidden">Stop</button>
+            
             <button id="reset">Reset</button>
             <button id="controls">Controls</button>
         </div>
 
         <!-- Task Management -->
-        <div class="tasks">
+        <div class="task-section">
             <button id="tasks">Tasks</button>
-            <button id="add-task">Add Task</button>
+            
+            <!-- Task Layout (Hidden by Default) -->
+            <div id="task-layout" class="hidden">
+                <div class="task-header">
+                    <h2>Task List</h2>
+                    <button id="add-task">+ Add Task</button>
+                </div>
+                <div id="task-list">
+                    <!-- Tasks will be dynamically added here -->
+                </div>
+            </div>
         </div>
-
     </div>
 
     <script src="app.js" async defer></script>
