@@ -1,18 +1,28 @@
+
+// Buttons to start, stop, pause, reset, and show controls
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const pauseButton = document.getElementById('pause');
 const resetButton = document.getElementById('reset');
 const controlsButton = document.getElementById('controls');
+
+// Time display
 const timeDisplay = document.getElementById('time');
 const timeH1 = timeDisplay.querySelector('h1'); // Get the h1 element inside timeDisplay
+
+// Controls to switch between pomodoro, short break, and long break
 const pomdodoro = document.getElementById('pomodoro');
 const shortBreak = document.getElementById('short-break');
 const longBreak = document.getElementById('long-break');
 
+// Sounds
+const alarmSound = new Audio('./sounds/alarm-clock.mp3'); 
+
+// States
 let shortBreakState = false;
 let longBreakState = false;
 let pomodoroState = true;
-
+// Time left in seconds
 let timeLeft = 1500; // 25 minutes in seconds
 let timerInterval;
 
@@ -20,6 +30,7 @@ function startTimer() {
     timerInterval = setInterval(function () {
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
+            alarmSound.play();
             return;
         }
         timeLeft--;
@@ -49,7 +60,6 @@ pauseButton.addEventListener('click', function () {
 
 resetButton.addEventListener('click', function () {
     clearInterval(timerInterval);
-
     if (pomodoroState) {
         timeLeft = 1500;
     }
