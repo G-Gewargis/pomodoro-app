@@ -4,6 +4,12 @@ const stopButton = document.getElementById('stop');
 const pauseButton = document.getElementById('pause');
 const resetButton = document.getElementById('reset');
 const controlsButton = document.getElementById('controls');
+const tasksButton = document.getElementById('tasks');
+const tasksLayout = document.getElementById('task-layout');
+const addTaskButton = document.getElementById('submit-task');
+const clearTasksButton = document.getElementById('clear-tasks');
+const tasksCheckBox = document.getElementsByClassName('task-checkbox');
+const deleteTask = document.getElementsByClassName('delete-task');
 
 // Time display
 const timeDisplay = document.getElementById('time');
@@ -102,14 +108,17 @@ resetSettingsButton.addEventListener('click', function() {
     shortBreakTime = DEFAULT_SHORT_BREAK_TIME;
     longBreakTime = DEFAULT_LONG_BREAK_TIME;
 
+    // Save to localStorage
     localStorage.setItem('pomodoroTime', pomodoroTime);
     localStorage.setItem('shortBreakTime', shortBreakTime);
     localStorage.setItem('longBreakTime', longBreakTime);
 
+    // Update input fields
     pomodoroTimeInput.value = '25';
     shortBreakTimeInput.value = '5';
     longBreakTimeInput.value = '15';
 
+    // Update current timer if needed
     if (pomodoroState) {
         timeLeft = pomodoroTime;
     } else if (shortBreakState) {
@@ -121,6 +130,7 @@ resetSettingsButton.addEventListener('click', function() {
 });
 
 function startTimer() {
+    // Start the timer
     timerInterval = setInterval(function () {
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
@@ -131,7 +141,7 @@ function startTimer() {
         updateDisplay();
     }, 1000);
 }
-
+// Update the display
 function updateDisplay() {
     let minutes = Math.floor(timeLeft / 60);
     let seconds = timeLeft % 60;
@@ -142,7 +152,7 @@ function updateDisplay() {
 startButton.addEventListener('click', function () {
     startTimer();
     startButton.classList.add('hidden');
-    pauseButton.classList.remove('hidden'); // Show pause button when timer starts
+    pauseButton.classList.remove('hidden'); 
     
 });
 
@@ -200,4 +210,78 @@ longBreak.addEventListener('click', function () {
     updateDisplay();
     startButton.classList.remove('hidden');
     pauseButton.classList.add('hidden');
+});
+
+tasksButton.addEventListener('click', function() {
+    tasksLayout.classList.toggle('hidden');
+    if (tasksLayout.classList.contains('hidden')) { 
+        tasksButton.textContent = "Tasks";
+    } else {
+        tasksButton.textContent = "Close Tasks";
+    }
+});
+
+addTaskButton.addEventListener('click', function() {
+    // Create a new task element
+    const taskInput = document.getElementById('new-task-input');
+    const taskList = document.getElementById('submitted-list');
+    const task = document.createElement('li');
+
+    // Skip empty tasks
+    if (!taskInput.value.trim()) {
+        return;
+    }
+
+    // Create a checkbox and delete button
+    const taskCheckBox = document.createElement('button');
+    const deleteTask = document.createElement('button');
+
+    // Create an icon for the checkbox button
+    const checkIcon = document.createElement('i');
+    checkIcon.classList.add('far', 'fa-circle');
+    taskCheckBox.classList.add('task-checkbox');
+    taskCheckBox.appendChild(checkIcon);
+    
+    // Add event listener to the checkbox
+    taskCheckBox.addEventListener('click', function() {
+        // Toggle between unchecked and checked icons
+        checkIcon.classList.toggle('far');
+        checkIcon.classList.toggle('fas');
+        checkIcon.classList.toggle('fa-circle');
+        checkIcon.classList.toggle('fa-check-circle');
+        
+        // Toggle the completed class on the parent li
+        task.classList.toggle('completed');
+    });
+    
+    task.appendChild(taskCheckBox);
+
+    const taskText = document.createElement('span');
+    taskText.classList.add('task-text');
+    taskText.textContent = taskInput.value;
+    task.appendChild(taskText);
+    
+    // Create an icon for the delete button
+    const deleteIcon = document.createElement('i');
+    deleteIcon.classList.add('fas', 'fa-trash');
+    deleteTask.appendChild(deleteIcon);
+    deleteTask.classList.add('delete-task');
+    
+    // Add event listener to delete button
+    deleteTask.addEventListener('click', function() {
+        task.remove();
+    });
+    
+    task.appendChild(deleteTask);
+    
+    // Append the completed task to the list
+    taskList.appendChild(task);
+    
+    // Clear input field
+    taskInput.value = '';
+});
+
+clearTasksButton.addEventListener('click', function() {
+    const taskList = document.getElementById('submitted-list');
+    taskList.innerHTML = '';
 });
