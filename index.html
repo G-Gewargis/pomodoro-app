@@ -51,6 +51,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- Settings Modal (Hidden by Default) -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Settings</h2>
+                    <button id="close-settings" class="close-button">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label for="pomodoro-time">Pomodoro Duration (minutes)</label>
+                        <input type="number" id="pomodoro-time" min="1" max="60" value="25">
+                    </div>
+                    <div class="setting-group">
+                        <label for="short-break-time">Short Break Duration (minutes)</label>
+                        <input type="number" id="short-break-time" min="1" max="30" value="5">
+                    </div>
+                    <div class="setting-group">
+                        <label for="long-break-time">Long Break Duration (minutes)</label>
+                        <input type="number" id="long-break-time" min="5" max="60" value="15">
+                    </div>
+                    <div class="setting-actions">
+                        <button id="reset-settings">Reset Settings</button>
+                        <button id="save-settings">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="app.js" async defer></script>
