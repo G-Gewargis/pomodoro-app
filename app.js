@@ -29,22 +29,22 @@ function updateDisplay() {
 
 startButton.addEventListener('click', function () {
     startTimer();
-    startButton.hidden = true;
-    pauseButton.hidden = false; // Show pause button when timer starts
+    startButton.classList.add('hidden');
+    pauseButton.classList.remove('hidden'); // Show pause button when timer starts
 });
 
 pauseButton.addEventListener('click', function () {
     clearInterval(timerInterval);
-    startButton.hidden = false; // Show start button again when paused
-    pauseButton.hidden = true; // Hide pause button
+    startButton.classList.remove('hidden');
+    pauseButton.classList.add('hidden');
 });
 
 resetButton.addEventListener('click', function () {
     clearInterval(timerInterval);
     timeLeft = 1500;
     updateDisplay();
-    startButton.hidden = false; // Reset start button to be visible
-    pauseButton.hidden = true;  // Reset pause button to be hidden
+    startButton.classList.remove('hidden');
+    pauseButton.classList.add('hidden');
 });
 
 
