@@ -256,7 +256,7 @@ button:active {
 /* ===========================================
    RESPONSIVE STYLES
    =========================================== */
-@media (max-width: 480px) {
+   @media (max-width: 480px) {
     .container {
         margin: 20px;
         padding: 20px;
@@ -270,6 +270,7 @@ button:active {
     .break-options, .buttons, .tasks {
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
 
     button {
@@ -282,7 +283,17 @@ button:active {
         align-items: stretch;
     }
     
-    .buttons button {
+    .buttons button, #tasks {
         margin-bottom: 10px;
+        max-width: none;
+        width: 100%;
+    }
+    
+    .task-section {
+        width: 100%;
+    }
+    
+    #tasks {
+        max-width: none;
     }
 }
