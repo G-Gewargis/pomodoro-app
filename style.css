@@ -140,7 +140,7 @@ button:active {
     background-color: #d35400;
 }
 
-#pause, #stop {
+#pause {
     transition: opacity 0.3s ease, visibility 0.3s;
 }
 
