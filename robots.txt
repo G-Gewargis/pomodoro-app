@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://G-Gewargis.github.io/pomodoro-app/sitemap.xml
