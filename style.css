@@ -104,6 +104,11 @@ button:active {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.break-options button:active {
+    transform: scale(0.95);
+    background-color: #3498db;
+}
+
 /* ===========================================
    CONTROL BUTTONS SECTION
    =========================================== */

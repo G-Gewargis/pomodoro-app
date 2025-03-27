@@ -5,6 +5,13 @@ const resetButton = document.getElementById('reset');
 const controlsButton = document.getElementById('controls');
 const timeDisplay = document.getElementById('time');
 const timeH1 = timeDisplay.querySelector('h1'); // Get the h1 element inside timeDisplay
+const pomdodoro = document.getElementById('pomodoro');
+const shortBreak = document.getElementById('short-break');
+const longBreak = document.getElementById('long-break');
+
+let shortBreakState = false;
+let longBreakState = false;
+let pomodoroState = true;
 
 let timeLeft = 1500; // 25 minutes in seconds
 let timerInterval;
@@ -31,6 +38,7 @@ startButton.addEventListener('click', function () {
     startTimer();
     startButton.classList.add('hidden');
     pauseButton.classList.remove('hidden'); // Show pause button when timer starts
+    
 });
 
 pauseButton.addEventListener('click', function () {
@@ -41,10 +49,51 @@ pauseButton.addEventListener('click', function () {
 
 resetButton.addEventListener('click', function () {
     clearInterval(timerInterval);
+
+    if (pomodoroState) {
+        timeLeft = 1500;
+    }
+    else if (shortBreakState) {
+        timeLeft = 300;
+    }
+    else if (longBreakState) {
+        timeLeft = 900;
+    }
+
+    updateDisplay();
+    startButton.classList.remove('hidden');
+    pauseButton.classList.add('hidden');
+});
+
+pomdodoro.addEventListener('click', function () {
+    pomodoroState = true;
+    shortBreakState = false;
+    longBreakState = false;
+    clearInterval(timerInterval);
     timeLeft = 1500;
     updateDisplay();
     startButton.classList.remove('hidden');
     pauseButton.classList.add('hidden');
 });
 
+shortBreak.addEventListener('click', function () {
+    pomodoroState = false;
+    shortBreakState = true;
+    longBreakState = false;
+    clearInterval(timerInterval);
+    timeLeft = 300;
+    updateDisplay();
+    startButton.classList.remove('hidden');
+    pauseButton.classList.add('hidden');
+});
 
+longBreak.addEventListener('click', function () {
+    pomodoroState = false;
+    shortBreakState = false;
+    longBreakState = true;
+    clearInterval(timerInterval);
+    timeLeft = 900;
+    updateDisplay();
+    startButton.classList.remove('hidden');
+    pauseButton.classList.add('hidden');
+});
