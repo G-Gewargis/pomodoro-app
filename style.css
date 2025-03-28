@@ -344,6 +344,12 @@ button:active {
 .task-text {
     flex-grow: 1;
     transition: all 0.2s ease;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: normal;
+    overflow: hidden;
 }
 
 #submitted-list li.completed .task-checkbox {
@@ -640,6 +646,46 @@ footer {
     
     #new-task-input, #submit-task, #clear-tasks {
         width: 100%;
+    }
+
+    /* Fix for checkboxes and delete buttons on mobile */
+    #submitted-list li {
+        padding: 12px 10px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    
+    /* Make checkbox and delete buttons fixed size on mobile */
+    .task-checkbox {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+        font-size: 1.2rem;
+    }
+    
+    .delete-task {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        margin-left: 10px;
+        font-size: 1.2rem;
+    }
+    
+    /* Fix for task text on mobile - prevent single word breaks */
+    .task-text {
+        word-break: normal;
+        overflow-wrap: anywhere;
+        hyphens: manual;
+        font-size: 0.95rem;
+        padding: 0 5px;
+        line-height: 1.4;
+    }
+    
+    /* Increase touch target size for better mobile UX */
+    button {
+        padding: 12px 20px;
+        font-size: 0.95rem;
     }
 }
 
