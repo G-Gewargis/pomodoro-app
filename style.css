@@ -642,3 +642,110 @@ footer {
         width: 100%;
     }
 }
+
+/* ===========================================
+   DARK MODE STYLES
+   =========================================== */
+body.dark-mode {
+    background-color: #1a202c;
+}
+
+body.dark-mode .container {
+    background-color: #2d3748;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode footer {
+    background-color: #2d3748;
+    border-top: 1px solid #4a5568;
+}
+
+body.dark-mode #title h1 {
+    color: #e2e8f0;
+}
+
+body.dark-mode #time h1 {
+    color: #63b3ed;
+}
+
+body.dark-mode .break-options button {
+    background-color: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark-mode .break-options button:hover {
+    background-color: #63b3ed;
+}
+
+body.dark-mode #task-layout {
+    background-color: #2d3748;
+}
+
+body.dark-mode #task-header h2 {
+    color: #e2e8f0;
+}
+
+body.dark-mode .task-item,
+body.dark-mode #submitted-list li {
+    background-color: #4a5568;
+}
+
+body.dark-mode .task-text {
+    color: #e2e8f0;
+}
+
+body.dark-mode #new-task-input {
+    background-color: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark-mode .modal-content {
+    background-color: #2d3748;
+}
+
+body.dark-mode .modal-header {
+    border-bottom: 1px solid #4a5568;
+}
+
+body.dark-mode .modal-header h2 {
+    color: #e2e8f0;
+}
+
+body.dark-mode .setting-group label {
+    color: #e2e8f0;
+}
+
+body.dark-mode .setting-group input {
+    background-color: #1a202c;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+body.dark-mode .footer-text p {
+    color: #a0aec0;
+}
+
+body.dark-mode .social-link {
+    background-color: #1a202c;
+    color: #63b3ed;
+}
+
+/* Dark mode button styles */
+#dark-mode {
+    background-color: #6b46c1;
+    color: white;
+}
+
+#dark-mode:hover {
+    background-color: #553c9a;
+}
+
+body.dark-mode #dark-mode {
+    background-color: #f6ad55;
+    color: #2d3748;
+}
+
+body.dark-mode #dark-mode:hover {
+    background-color: #ed8936;
+}

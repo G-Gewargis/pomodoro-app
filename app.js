@@ -10,6 +10,7 @@ const addTaskButton = document.getElementById('submit-task');
 const clearTasksButton = document.getElementById('clear-tasks');
 const tasksCheckBox = document.getElementsByClassName('task-checkbox');
 const deleteTask = document.getElementsByClassName('delete-task');
+const darkModeButton = document.getElementById('dark-mode');
 
 // Time display
 const timeDisplay = document.getElementById('time');
@@ -284,4 +285,34 @@ addTaskButton.addEventListener('click', function() {
 clearTasksButton.addEventListener('click', function() {
     const taskList = document.getElementById('submitted-list');
     taskList.innerHTML = '';
+});
+
+// Add this to initialize dark mode based on user preference
+// Check if dark mode is preferred or was previously set
+const currentTheme = localStorage.getItem("theme");
+
+// If no theme preference is saved, default to dark mode
+if (currentTheme === "light") {
+    // Only use light mode if explicitly set
+    document.body.classList.remove("dark-mode");
+    darkModeButton.innerHTML = '<i class="fas fa-moon"></i>';
+} else {
+    // Default to dark mode
+    document.body.classList.add("dark-mode");
+    darkModeButton.innerHTML = '<i class="fas fa-sun"></i>';
+    localStorage.setItem("theme", "dark");
+}
+
+// Add this to handle dark mode button click
+darkModeButton.addEventListener("click", function() {
+    document.body.classList.toggle("dark-mode");
+    
+    // Update button icon
+    if (document.body.classList.contains("dark-mode")) {
+        darkModeButton.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem("theme", "dark");
+    } else {
+        darkModeButton.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem("theme", "light");
+    }
 });
