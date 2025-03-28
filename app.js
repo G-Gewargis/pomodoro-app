@@ -22,7 +22,7 @@ const shortBreak = document.getElementById('short-break');
 const longBreak = document.getElementById('long-break');
 
 // Sounds
-const alarmSound = new Audio('./sounds/alarm-clock.mp3'); 
+const alarmSound = new Audio('./sounds/alarm-clock.mp3');
 
 // States
 let shortBreakState = false;
@@ -54,7 +54,7 @@ let longBreakTime = localStorage.getItem('longBreakTime') ? parseInt(localStorag
 
 
 // Cap values at 999 minutes as user types
-pomodoroTimeInput.addEventListener('input', function() {
+pomodoroTimeInput.addEventListener('input', function () {
     this.value = this.value.replace(/[^\d]/g, '');
     let num = parseInt(this.value);
     // Empty input check
@@ -72,7 +72,7 @@ pomodoroTimeInput.addEventListener('input', function() {
     }
 });
 
-shortBreakTimeInput.addEventListener('input', function() {
+shortBreakTimeInput.addEventListener('input', function () {
     this.value = this.value.replace(/[^\d]/g, '');
     let num = parseInt(this.value);
     // Empty input check
@@ -90,7 +90,7 @@ shortBreakTimeInput.addEventListener('input', function() {
     }
 });
 
-longBreakTimeInput.addEventListener('input', function() {
+longBreakTimeInput.addEventListener('input', function () {
     this.value = this.value.replace(/[^\d]/g, '');
     let num = parseInt(this.value);
     // Empty input check
@@ -117,24 +117,24 @@ longBreakTimeInput.value = longBreakTime / 60;
 controlsButton.textContent = "Settings";
 
 // Open settings modal
-controlsButton.addEventListener('click', function() {
+controlsButton.addEventListener('click', function () {
     settingsModal.classList.remove('hidden');
 });
 
 // Close settings modal
-closeSettingsButton.addEventListener('click', function() {
+closeSettingsButton.addEventListener('click', function () {
     settingsModal.classList.add('hidden');
 });
 
 // Close modal when clicking outside
-settingsModal.addEventListener('click', function(event) {
+settingsModal.addEventListener('click', function (event) {
     if (event.target === settingsModal) {
         settingsModal.classList.add('hidden');
     }
 });
 
 // Save settings
-saveSettingsButton.addEventListener('click', function() {
+saveSettingsButton.addEventListener('click', function () {
     // Validate input
     if (pomodoroTimeInput.value === '' || shortBreakTimeInput.value === '' || longBreakTimeInput.value === '') {
         return;
@@ -143,12 +143,12 @@ saveSettingsButton.addEventListener('click', function() {
     pomodoroTime = parseInt(pomodoroTimeInput.value) * 60;
     shortBreakTime = parseInt(shortBreakTimeInput.value) * 60;
     longBreakTime = parseInt(longBreakTimeInput.value) * 60;
-    
+
     // Save to localStorage
     localStorage.setItem('pomodoroTime', pomodoroTime);
     localStorage.setItem('shortBreakTime', shortBreakTime);
     localStorage.setItem('longBreakTime', longBreakTime);
-    
+
     // Update current timer if needed
     if (pomodoroState) {
         timeLeft = pomodoroTime;
@@ -157,14 +157,14 @@ saveSettingsButton.addEventListener('click', function() {
     } else if (longBreakState) {
         timeLeft = longBreakTime;
     }
-    
+
     // Update display and close modal
     updateDisplay();
     settingsModal.classList.add('hidden');
 });
 
 // Reset settings to default
-resetSettingsButton.addEventListener('click', function() {
+resetSettingsButton.addEventListener('click', function () {
     pomodoroTime = DEFAULT_POMODORO_TIME;
     shortBreakTime = DEFAULT_SHORT_BREAK_TIME;
     longBreakTime = DEFAULT_LONG_BREAK_TIME;
@@ -207,14 +207,14 @@ function updateDisplay() {
     let minutes = Math.floor(timeLeft / 60);
     let seconds = timeLeft % 60;
     let formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    timeH1.innerText = formattedTime; 
+    timeH1.innerText = formattedTime;
 }
 
 startButton.addEventListener('click', function () {
     startTimer();
     startButton.classList.add('hidden');
-    pauseButton.classList.remove('hidden'); 
-    
+    pauseButton.classList.remove('hidden');
+
 });
 
 pauseButton.addEventListener('click', function () {
@@ -273,16 +273,16 @@ longBreak.addEventListener('click', function () {
     pauseButton.classList.add('hidden');
 });
 
-tasksButton.addEventListener('click', function() {
+tasksButton.addEventListener('click', function () {
     tasksLayout.classList.toggle('hidden');
-    if (tasksLayout.classList.contains('hidden')) { 
+    if (tasksLayout.classList.contains('hidden')) {
         tasksButton.textContent = "Tasks";
     } else {
         tasksButton.textContent = "Close Tasks";
     }
 });
 
-addTaskButton.addEventListener('click', function() {
+addTaskButton.addEventListener('click', function () {
     // Create a new task element
     const taskInput = document.getElementById('new-task-input');
     const taskList = document.getElementById('submitted-list');
@@ -302,47 +302,47 @@ addTaskButton.addEventListener('click', function() {
     checkIcon.classList.add('far', 'fa-circle');
     taskCheckBox.classList.add('task-checkbox');
     taskCheckBox.appendChild(checkIcon);
-    
+
     // Add event listener to the checkbox
-    taskCheckBox.addEventListener('click', function() {
+    taskCheckBox.addEventListener('click', function () {
         // Toggle between unchecked and checked icons
         checkIcon.classList.toggle('far');
         checkIcon.classList.toggle('fas');
         checkIcon.classList.toggle('fa-circle');
         checkIcon.classList.toggle('fa-check-circle');
-        
+
         // Toggle the completed class on the parent li
         task.classList.toggle('completed');
     });
-    
+
     task.appendChild(taskCheckBox);
 
     const taskText = document.createElement('span');
     taskText.classList.add('task-text');
     taskText.textContent = taskInput.value;
     task.appendChild(taskText);
-    
+
     // Create an icon for the delete button
     const deleteIcon = document.createElement('i');
     deleteIcon.classList.add('fas', 'fa-trash');
     deleteTask.appendChild(deleteIcon);
     deleteTask.classList.add('delete-task');
-    
+
     // Add event listener to delete button
-    deleteTask.addEventListener('click', function() {
+    deleteTask.addEventListener('click', function () {
         task.remove();
     });
-    
+
     task.appendChild(deleteTask);
-    
+
     // Append the completed task to the list
     taskList.appendChild(task);
-    
+
     // Clear input field
     taskInput.value = '';
 });
 
-clearTasksButton.addEventListener('click', function() {
+clearTasksButton.addEventListener('click', function () {
     const taskList = document.getElementById('submitted-list');
     taskList.innerHTML = '';
 });
@@ -364,9 +364,9 @@ if (currentTheme === "light") {
 }
 
 // Add this to handle dark mode button click
-darkModeButton.addEventListener("click", function() {
+darkModeButton.addEventListener("click", function () {
     document.body.classList.toggle("dark-mode");
-    
+
     // Update button icon
     if (document.body.classList.contains("dark-mode")) {
         darkModeButton.innerHTML = '<i class="fas fa-sun"></i>';
