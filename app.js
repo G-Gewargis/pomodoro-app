@@ -52,6 +52,62 @@ let pomodoroTime = localStorage.getItem('pomodoroTime') ? parseInt(localStorage.
 let shortBreakTime = localStorage.getItem('shortBreakTime') ? parseInt(localStorage.getItem('shortBreakTime')) : DEFAULT_SHORT_BREAK_TIME;
 let longBreakTime = localStorage.getItem('longBreakTime') ? parseInt(localStorage.getItem('longBreakTime')) : DEFAULT_LONG_BREAK_TIME;
 
+
+// Cap values at 999 minutes as user types
+pomodoroTimeInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^\d]/g, '');
+    let num = parseInt(this.value);
+    // Empty input check
+    if (this.value === '') {
+        return;
+    }
+    // Enforce minimum of 1
+    if (num < 1) {
+        this.value = '';
+    }
+
+    // Enforce maximum of 999
+    if (num > 999) {
+        this.value = '999';
+    }
+});
+
+shortBreakTimeInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^\d]/g, '');
+    let num = parseInt(this.value);
+    // Empty input check
+    if (this.value === '') {
+        return;
+    }
+    // Enforce minimum of 1
+    if (isNaN(num) || num < 1) {
+        this.value = '';
+    }
+
+    // Enforce maximum of 999
+    if (num > 999) {
+        this.value = '999';
+    }
+});
+
+longBreakTimeInput.addEventListener('input', function() {
+    this.value = this.value.replace(/[^\d]/g, '');
+    let num = parseInt(this.value);
+    // Empty input check
+    if (this.value === '') {
+        return;
+    }
+    // Enforce minimum of 1
+    if (isNaN(num) || num < 1) {
+        this.value = '';
+    }
+
+    // Enforce maximum of 999
+    if (num > 999) {
+        this.value = '999';
+    }
+});
+
 // Initialize input fields with current values
 pomodoroTimeInput.value = pomodoroTime / 60;
 shortBreakTimeInput.value = shortBreakTime / 60;
@@ -79,6 +135,10 @@ settingsModal.addEventListener('click', function(event) {
 
 // Save settings
 saveSettingsButton.addEventListener('click', function() {
+    // Validate input
+    if (pomodoroTimeInput.value === '' || shortBreakTimeInput.value === '' || longBreakTimeInput.value === '') {
+        return;
+    }
     // Convert minutes to seconds
     pomodoroTime = parseInt(pomodoroTimeInput.value) * 60;
     shortBreakTime = parseInt(shortBreakTimeInput.value) * 60;
